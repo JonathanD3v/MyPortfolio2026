@@ -60,7 +60,6 @@ export default function Stack() {
       id="stack"
       className="relative overflow-hidden bg-[#F4F1EA] px-6 py-32 md:px-12 md:py-40"
     >
-      {/* Subtle background depth */}
       <div className="absolute inset-0 opacity-30">
         <div className="absolute -right-32 -top-32 h-[500px] w-[500px] rounded-full bg-[#E8794F]/5 blur-3xl" />
         <div className="absolute -bottom-48 -left-48 h-[400px] w-[400px] rounded-full bg-neutral-400/5 blur-3xl" />

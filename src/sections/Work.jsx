@@ -48,7 +48,7 @@ const Work = () => {
   return (
     <section
       id="work"
-      className="relative overflow-hidden bg-[#F4F1EA] px-5 py-28 sm:px-8 md:px-12 md:py-36"
+      className="relative overflow-hidden bg-[#e9e3de] px-5 py-28 sm:px-8 md:px-12 md:py-36"
     >
       <div className="mx-auto max-w-7xl">
         <div className="mb-20 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
@@ -109,7 +109,6 @@ const Work = () => {
               />
 
               <div className="relative grid gap-4 py-8 sm:py-10 md:grid-cols-[60px_1fr_1fr_80px] md:py-12">
-                {/* Number */}
                 <span className="font-mono text-xs text-neutral-400 md:mt-1">
                   {project.number}
                 </span>

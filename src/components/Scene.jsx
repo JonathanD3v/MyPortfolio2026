@@ -13,8 +13,15 @@ const MainObject = () => {
   const [mouseX, setMouseX] = useState(0);
   const [mouseY, setMouseY] = useState(0);
 
-  // Pointer tracking for interactive rotation across mouse, touch, and stylus
+  // Only track pointer movement on non-touch devices so page scrolling stays smooth on mobile.
   useEffect(() => {
+    const isTouchDevice =
+      window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
+
+    if (isTouchDevice) {
+      return undefined;
+    }
+
     const handlePointerMove = (event) => {
       const width = window.innerWidth || 1;
       const height = window.innerHeight || 1;
@@ -25,11 +32,9 @@ const MainObject = () => {
     };
 
     window.addEventListener("pointermove", handlePointerMove);
-    window.addEventListener("touchmove", handlePointerMove, { passive: true });
 
     return () => {
       window.removeEventListener("pointermove", handlePointerMove);
-      window.removeEventListener("touchmove", handlePointerMove);
     };
   }, []);
 
@@ -147,8 +152,22 @@ const ParticleSystem = () => {
 
 // Main Scene Component
 const Scene = () => {
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(pointer: coarse)");
+    const updateDeviceType = () => setIsTouchDevice(mediaQuery.matches);
+
+    updateDeviceType();
+    mediaQuery.addEventListener("change", updateDeviceType);
+
+    return () => {
+      mediaQuery.removeEventListener("change", updateDeviceType);
+    };
+  }, []);
+
   return (
-    <div className="h-full w-full">
+    <div className="h-full w-full" style={{ touchAction: "pan-y" }}>
       <Canvas
         dpr={[1, 1.8]}
         camera={{
@@ -165,6 +184,7 @@ const Scene = () => {
         <ParticleSystem />
 
         <OrbitControls
+          enableRotate={!isTouchDevice}
           enableZoom={false}
           enablePan={false}
           autoRotate={false}

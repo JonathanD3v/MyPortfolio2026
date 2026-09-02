@@ -30,7 +30,7 @@ const projects = [
     color: "#3B82F6",
   },
   {
-    number: "02",
+    number: "03",
     title: "FixHub Management System",
     type: "Full-Stack Application",
     description:
@@ -45,7 +45,7 @@ const projects = [
   },
 
   {
-    number: "03",
+    number: "04",
     title: "Live Chat API",
     type: "Backend Project",
     description:

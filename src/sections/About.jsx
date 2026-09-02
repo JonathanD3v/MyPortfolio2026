@@ -240,9 +240,15 @@ export default function About() {
               {[
                 {
                   school: "NCC Education",
-                  program: "Level 4 & Level 5 Diploma in Computing",
+                  program: "Level 4 Diploma in Computing",
                   tag: "Computing",
-                  year: "2022 — 2024",
+                  year: "2022 — 2023",
+                },
+                {
+                  school: "NCC Education",
+                  program: "Level 5 Diploma in Computing",
+                  tag: "Computing",
+                  year: "2023 — 2024",
                 },
                 // {
                 //   school: "Fairway Technology",

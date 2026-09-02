@@ -85,15 +85,15 @@ const Hero = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1 }}
-              className="mt-10 hidden lg:block"
+              className="mt-8 sm:mt-10 lg:mt-12"
             >
               <div className="relative inline-block">
                 <svg
-                  width="100"
-                  height="50"
+                  width="84"
+                  height="40"
                   viewBox="0 0 100 50"
                   fill="none"
-                  className="absolute -right-20 -top-8"
+                  className="absolute -right-14 -top-6 opacity-70 sm:-right-20 sm:-top-8"
                 >
                   <path
                     d="M5 10 C30 5, 55 10, 85 35"
@@ -107,7 +107,7 @@ const Hero = () => {
                     strokeWidth="1"
                   />
                 </svg>
-                <span className="font-mono text-[10px] uppercase tracking-widest text-neutral-400">
+                <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-neutral-400 sm:text-[10px]">
                   starting point
                 </span>
               </div>
@@ -139,10 +139,14 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.2 }}
-          className="absolute bottom-8 left-6 hidden items-center gap-3 md:flex md:left-10"
+          className="absolute bottom-4 left-3 flex items-center gap-2 md:bottom-8 md:left-6 md:gap-3 lg:left-10"
         >
-          <ArrowDownRight size={18} strokeWidth={1.2} />
-          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-neutral-400">
+          <ArrowDownRight
+            size={14}
+            strokeWidth={1.2}
+            className="text-neutral-500 md:size-[18px]"
+          />
+          <span className="font-mono text-[8px] uppercase tracking-[0.18em] text-neutral-400 sm:text-[9px] md:text-[10px]">
             Scroll to explore
           </span>
         </motion.div>

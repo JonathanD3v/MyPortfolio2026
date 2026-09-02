@@ -5,7 +5,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="relative overflow-hidden bg-[#F4F1EA] px-5 py-24 sm:px-8 md:px-12 md:py-28"
+      className="relative overflow-hidden border-t border-[#D8D4CA] bg-[#F5F3EE] px-5 py-20 sm:px-8 md:px-12 md:py-24"
     >
       <div className="absolute -right-40 -top-40 h-[600px] w-[600px] rounded-full bg-gradient-to-br from-[#E8794F]/5 to-transparent blur-3xl" />
       <div className="absolute -left-40 bottom-0 h-[400px] w-[400px] rounded-full bg-gradient-to-tr from-[#E8794F]/5 to-transparent blur-3xl" />
@@ -149,7 +149,7 @@ const Contact = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-16 flex flex-col gap-3 border-t border-[#D8D4CA] pt-5 text-[9px] uppercase tracking-[0.2em] text-neutral-400 sm:flex-row sm:items-center sm:justify-between"
+          className="mt-12 flex flex-col gap-3 border-t border-[#D8D4CA] pt-5 text-[9px] uppercase tracking-[0.2em] text-neutral-400 sm:flex-row sm:items-center sm:justify-between"
         >
           <span className="font-medium tracking-[0.25em]">Jonathan.</span>
 

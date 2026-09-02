@@ -55,7 +55,7 @@ export default function About() {
   return (
     <section
       id="about"
-      className="relative overflow-hidden bg-[#F4F1EA] px-5 py-24 sm:px-8 md:px-12 md:py-28"
+      className="relative overflow-hidden border-t border-[#D8D4CA] bg-[#F5F3EE] px-5 py-18 sm:px-8 md:px-12 md:py-22"
     >
       <div className="relative mx-auto max-w-7xl">
         <motion.div
@@ -219,7 +219,7 @@ export default function About() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mt-24"
+          className="mt-16"
         >
           <div className="mb-8 flex items-center gap-3">
             <GraduationCap

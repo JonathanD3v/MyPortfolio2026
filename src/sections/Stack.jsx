@@ -58,7 +58,7 @@ export default function Stack() {
   return (
     <section
       id="stack"
-      className="relative overflow-hidden bg-[#F4F1EA] px-6 py-32 md:px-12 md:py-40"
+      className="relative overflow-hidden border-t border-[#D8D4CA] bg-[#F5F3EE] px-6 py-20 md:px-12 md:py-28"
     >
       <div className="absolute inset-0 opacity-30">
         <div className="absolute -right-32 -top-32 h-[500px] w-[500px] rounded-full bg-[#E8794F]/5 blur-3xl" />
@@ -191,7 +191,7 @@ export default function Stack() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-12 flex items-center justify-between border-t border-[#D8D4CA] pt-6"
+          className="mt-8 flex items-center justify-between border-t border-[#D8D4CA] pt-5"
         >
           <span className="text-[10px] uppercase tracking-[0.25em] text-neutral-400">
             {stack.reduce((acc, group) => acc + group.items.length, 0)}{" "}

@@ -7,7 +7,7 @@ import Contact from "./sections/Contact";
 
 function App() {
   return (
-    <main>
+    <main className="bg-[#F5F3EE] text-[#20201E]">
       <Navigation />
       <Hero />
       <About />

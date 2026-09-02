@@ -244,18 +244,18 @@ export default function About() {
                   tag: "Computing",
                   year: "2022 — 2024",
                 },
-                {
-                  school: "Fairway Technology",
-                  program: "RockStar Web Developer Course",
-                  tag: "Web Dev",
-                  year: "2025",
-                },
-                {
-                  school: "Turing Programming Training Center",
-                  program: "Advanced Software Engineering & Design Concepts",
-                  tag: "Software",
-                  year: "2026",
-                },
+                // {
+                //   school: "Fairway Technology",
+                //   program: "RockStar Web Developer Course",
+                //   tag: "Web Dev",
+                //   year: "2025",
+                // },
+                // {
+                //   school: "Turing Programming Training Center",
+                //   program: "Advanced Software Engineering & Design Concepts",
+                //   tag: "Software",
+                //   year: "2025",
+                // },
               ].map((item, index) => (
                 <motion.div
                   key={item.school}

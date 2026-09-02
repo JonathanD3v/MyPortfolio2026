@@ -120,7 +120,7 @@ const Hero = () => {
             transition={{ duration: 1 }}
             className="relative mx-auto w-full max-w-[540px] lg:max-w-none"
           >
-            <div className="h-[220px] w-full sm:h-[300px] md:h-[380px] lg:h-[500px] xl:h-[560px]">
+            <div className="h-[220px] w-full sm:h-[340px] md:h-[380px] lg:h-[500px] xl:h-[560px]">
               <Scene />
             </div>
 

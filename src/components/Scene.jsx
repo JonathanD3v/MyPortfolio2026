@@ -1,7 +1,6 @@
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Float, OrbitControls, Points, PointMaterial } from "@react-three/drei";
 import { useRef, useState, useEffect, useMemo } from "react";
-import * as THREE from "three";
 
 // Main 3D Object
 const MainObject = () => {
@@ -13,20 +12,23 @@ const MainObject = () => {
   const [mouseX, setMouseX] = useState(0);
   const [mouseY, setMouseY] = useState(0);
 
-  // Only track pointer movement on non-touch devices so page scrolling stays smooth on mobile.
+  // Track mouse only on devices that support a mouse/pointer.
+  // This prevents touch interaction from interfering with page scrolling.
   useEffect(() => {
     const isTouchDevice =
       window.matchMedia && window.matchMedia("(pointer: coarse)").matches;
 
     if (isTouchDevice) {
-      return undefined;
+      return;
     }
 
     const handlePointerMove = (event) => {
       const width = window.innerWidth || 1;
       const height = window.innerHeight || 1;
+
       const x = (event.clientX / width) * 2 - 1;
       const y = -(event.clientY / height) * 2 + 1;
+
       setMouseX(x);
       setMouseY(y);
     };
@@ -45,6 +47,7 @@ const MainObject = () => {
     if (groupRef.current) {
       groupRef.current.rotation.x +=
         (mouseY * 0.3 - groupRef.current.rotation.x) * 0.02;
+
       groupRef.current.rotation.y +=
         (mouseX * 0.3 - groupRef.current.rotation.y) * 0.02;
     }
@@ -72,6 +75,7 @@ const MainObject = () => {
         {/* Core solid shape */}
         <mesh ref={meshRef}>
           <icosahedronGeometry args={[1.5, 0]} />
+
           <meshStandardMaterial
             color="#E8794F"
             roughness={0.3}
@@ -84,6 +88,7 @@ const MainObject = () => {
         {/* Wireframe layer */}
         <mesh ref={wireRef}>
           <icosahedronGeometry args={[1.6, 1]} />
+
           <meshBasicMaterial
             color="#E8794F"
             wireframe
@@ -95,6 +100,7 @@ const MainObject = () => {
         {/* Outer glow wireframe */}
         <mesh ref={glowRef}>
           <icosahedronGeometry args={[1.8, 0]} />
+
           <meshBasicMaterial
             color="#E8794F"
             wireframe
@@ -106,6 +112,7 @@ const MainObject = () => {
         {/* Inner small shape */}
         <mesh>
           <icosahedronGeometry args={[0.4, 0]} />
+
           <meshStandardMaterial
             color="#E8794F"
             roughness={0.1}
@@ -120,17 +127,22 @@ const MainObject = () => {
 // Particle System
 const ParticleSystem = () => {
   const count = 300;
+
   const positions = useMemo(() => {
     const pos = new Float32Array(count * 3);
-    for (let i = 0; i < count * 3; i++) {
+
+    for (let i = 0; i < count; i++) {
       const radius = 3 + Math.random() * 2;
       const theta = Math.random() * Math.PI * 2;
       const phi = Math.acos(2 * Math.random() - 1);
 
-      pos[i] = radius * Math.sin(phi) * Math.cos(theta);
-      pos[++i] = radius * Math.sin(phi) * Math.sin(theta);
-      pos[++i] = radius * Math.cos(phi);
+      pos[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
+
+      pos[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
+
+      pos[i * 3 + 2] = radius * Math.cos(phi);
     }
+
     return pos;
   }, []);
 
@@ -139,6 +151,7 @@ const ParticleSystem = () => {
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" args={[positions, 3]} />
       </bufferGeometry>
+
       <PointMaterial
         size={0.03}
         transparent
@@ -156,9 +169,13 @@ const Scene = () => {
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(pointer: coarse)");
-    const updateDeviceType = () => setIsTouchDevice(mediaQuery.matches);
+
+    const updateDeviceType = () => {
+      setIsTouchDevice(mediaQuery.matches);
+    };
 
     updateDeviceType();
+
     mediaQuery.addEventListener("change", updateDeviceType);
 
     return () => {
@@ -167,30 +184,52 @@ const Scene = () => {
   }, []);
 
   return (
-    <div className="h-full w-full" style={{ touchAction: "pan-y" }}>
+    <div
+      className="h-full w-full"
+      style={{
+        touchAction: "pan-y",
+      }}
+    >
       <Canvas
         dpr={[1, 1.8]}
         camera={{
           position: [0, 0, 5.5],
           fov: 42,
         }}
-        gl={{ antialias: true, alpha: true }}
+        gl={{
+          antialias: true,
+          alpha: true,
+        }}
+        style={{
+          touchAction: "pan-y",
+        }}
       >
         <ambientLight intensity={0.5} />
+
         <directionalLight position={[10, 10, 10]} intensity={0.5} />
+
         <directionalLight position={[-10, -10, -10]} intensity={0.3} />
 
         <MainObject />
+
         <ParticleSystem />
 
-        <OrbitControls
-          enableRotate={!isTouchDevice}
-          enableZoom={false}
-          enablePan={false}
-          autoRotate={false}
-          enableDamping
-          dampingFactor={0.05}
-        />
+        {/* 
+          IMPORTANT:
+          Do not mount OrbitControls on touch devices.
+          OrbitControls can capture touch events and prevent
+          normal browser scrolling.
+        */}
+        {!isTouchDevice && (
+          <OrbitControls
+            enableRotate
+            enableZoom={false}
+            enablePan={false}
+            autoRotate={false}
+            enableDamping
+            dampingFactor={0.05}
+          />
+        )}
       </Canvas>
     </div>
   );
